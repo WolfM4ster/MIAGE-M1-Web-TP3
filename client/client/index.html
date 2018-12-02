@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="lib/vue.min.js"></script>
+    <script src="lib/lodash.min.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>JS Bin</title>
+</head>
+
+<body>
+    <div id="app">
+        <form v-on:submit="ajouterRestaurant">
+            <label>
+                Nom : <input type="text" name="nom" required v-model="nom">
+            </label>
+            <label>
+                Cuisine : <input type="text" name="cuisine" required v-model="cuisine">
+            </label>
+
+            <button>Ajouter</button>
+        </form>
+
+        <br>
+
+        <form v-on:submit="supprimerRestaurant">
+            <label>
+                Id : <input type="text" name="id_delete" required v-model="id_delete">
+            </label>
+            <button>Supprimer</button>
+        </form>
+
+        <br>
+
+        <form v-on:submit="modifierRestaurant">
+            <label>
+                Id : <input type="text" name="id_modify" required v-model="id_modify">
+            </label>
+            <label>
+                Nom : <input type="text" name="nom" required v-model="nomModify">
+            </label>
+            <label>
+                Cuisine : <input type="text" name="cuisine" required v-model="cuisineModify">
+            </label>  
+
+            <button>Modifier</button>
+        </form>
+
+        <p>
+            <label>
+            Recherche : 
+            <input type="text" 
+                   v-on:input="chercherRestaurants"
+                   v-model="name"
+            >
+            </label>
+        </p>
+<h1>Nombre de restaurants : {{nbRestaurants}}</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Cuisine </th>
+            </tr>
+            <tbody>
+                <tr v-for="r,index in restaurants" v-bind:style="{backgroundColor:getColor(index)}"
+                    v-bind:class="{bordureRouge:(index === 2)}">
+                    <td>{{r._id}}</td>
+                    <td>{{r.name}}</td>
+                    <td> {{r.cuisine}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button v-on:click="premierePage">Première page</button>
+        <button id="pagePrevious" v-on:click="pagePrecedente">Précédent</button>
+        <button id="pageNext" v-on:click="pageSuivante">Suivant</button>
+        <button id="lastPage" v-on:click="dernierePage">Dernière page</button>
+    </div>
+
+</body>
+
+</html>
