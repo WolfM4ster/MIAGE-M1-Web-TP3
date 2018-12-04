@@ -24,7 +24,7 @@ function init() {
             this.premierePage();        
         },
         methods: {
-            getRestaurantsFromServer(callback) {
+            getRestaurantsFromServer() {
                 let url = "http://localhost:8080/api/restaurants?page=" +
                     this.page + "&pagesize=" +
                     this.pagesize + "&name=" +
@@ -39,9 +39,6 @@ function init() {
                         this.nbRestaurants = reponseJS.count;
                         this.calculerNbPages();
                         this.afficherBoutonsPagination();
-                        if(callback) {
-                            callback();
-                        }
                     })
                     .catch(function (err) {
                         console.log(err);
